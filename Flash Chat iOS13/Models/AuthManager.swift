@@ -43,8 +43,22 @@ struct AuthManager{
         }
     }
     
+    
     func signInUser(email: String, password: String){
-     
+        Auth.auth().signIn(withEmail: email, password: password, completion: { authResult, error in
+            if error != nil {
+                delegate?.onAuthError(error: error!)
+                print(error!)
+                return
+            }
+         
+            // probably safe
+            if let safeAuthResult = authResult {
+                print(safeAuthResult.credential?.accessToken ?? "cant get tocken")
+                delegate?.getAuthResult(authResult: safeAuthResult)
+                return
+            }
+        })
     }
     
     
