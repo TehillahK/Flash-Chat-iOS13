@@ -35,7 +35,7 @@ class RegisterViewController: UIViewController, AuthProtocol {
         
         print("just signed up \(authResult.user.email!)")
         
-        self.performSegue(withIdentifier: "registerToChat", sender: self)
+        self.performSegue(withIdentifier: K.registerSegue, sender: self)
     }
     
     

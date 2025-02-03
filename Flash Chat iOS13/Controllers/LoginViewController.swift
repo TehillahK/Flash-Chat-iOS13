@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, AuthProtocol {
     func getAuthResult(authResult: AuthDataResult) {
         print("just signed up \(authResult.user.email!)")
         
-        self.performSegue(withIdentifier: "loginToChat", sender: self)
+        self.performSegue(withIdentifier: K.loginSegue, sender: self)
         
     }
     

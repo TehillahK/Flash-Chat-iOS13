@@ -23,7 +23,7 @@ class ChatViewController: UIViewController, AuthProtocol {
         
         navigationItem.hidesBackButton = true
         
-        title = "⚡️FlashChat"
+        title = K.appName
         
         self.authManager.delegate = self
 
