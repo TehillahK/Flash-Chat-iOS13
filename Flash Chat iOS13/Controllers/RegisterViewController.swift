@@ -7,13 +7,45 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, AuthProtocol {
+   
 
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    @IBAction func registerPressed(_ sender: UIButton) {
+    var authManager = AuthManager()
+    
+    override func viewDidLoad() {
+        self.authManager.delegate = self
     }
+    
+    @IBAction func registerPressed(_ sender: UIButton) {
+        
+        if let userEmail = emailTextfield.text, let userPassword = passwordTextfield.text{
+            print("\(userEmail) \(userPassword)")
+            authManager.registerUser(email: userEmail, password: userPassword)
+        }
+    }
+    
+    
+    
+    func getAuthResult(authResult: AuthDataResult) {
+        
+        print("just signed up \(authResult.user.email!)")
+        
+        self.performSegue(withIdentifier: "registerToChat", sender: self)
+    }
+    
+    
+    
+    
+    
+    func onAuthError(error: any Error) {
+        print(error.localizedDescription)
+        
+    }
+    
     
 }
