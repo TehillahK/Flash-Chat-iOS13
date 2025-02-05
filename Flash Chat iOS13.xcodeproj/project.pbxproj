@@ -21,6 +21,9 @@
 		15391E7E2D50436400404B3D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15391E7D2D50436400404B3D /* AuthManager.swift */; };
 		15391E812D5102F300404B3D /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15391E802D5102EE00404B3D /* constants.swift */; };
 		15391E832D510EDF00404B3D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15391E822D510EDF00404B3D /* Message.swift */; };
+		15FC788E2D5229E1005FE342 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FC788D2D5229E1005FE342 /* MessageManager.swift */; };
+		15FC78912D53CB9D005FE342 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15FC78902D53CB9D005FE342 /* MessageCell.xib */; };
+		15FC78922D53CB9D005FE342 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FC788F2D53CB9D005FE342 /* MessageCell.swift */; };
 		A045DAE114E1964521BE6257 /* Pods_Flash_Chat_iOS13.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B494C6183C465E47DBFA360D /* Pods_Flash_Chat_iOS13.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,9 @@
 		15391E7D2D50436400404B3D /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		15391E802D5102EE00404B3D /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		15391E822D510EDF00404B3D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		15FC788D2D5229E1005FE342 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		15FC788F2D53CB9D005FE342 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		15FC78902D53CB9D005FE342 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		B494C6183C465E47DBFA360D /* Pods_Flash_Chat_iOS13.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flash_Chat_iOS13.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC125DCD3A414C67A0DF97A2 /* Pods-Flash Chat iOS13.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash Chat iOS13.debug.xcconfig"; path = "Target Support Files/Pods-Flash Chat iOS13/Pods-Flash Chat iOS13.debug.xcconfig"; sourceTree = "<group>"; };
 		F5A9F720E5C581F8A90466DE /* Pods-Flash Chat iOS13.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash Chat iOS13.release.xcconfig"; path = "Target Support Files/Pods-Flash Chat iOS13/Pods-Flash Chat iOS13.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				0B62817C235DEE8100E35CAF /* Main.storyboard */,
+				15FC788F2D53CB9D005FE342 /* MessageCell.swift */,
+				15FC78902D53CB9D005FE342 /* MessageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,6 +134,7 @@
 			children = (
 				15391E7D2D50436400404B3D /* AuthManager.swift */,
 				15391E822D510EDF00404B3D /* Message.swift */,
+				15FC788D2D5229E1005FE342 /* MessageManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B628183235DEE8400E35CAF /* LaunchScreen.storyboard in Resources */,
+				15FC78912D53CB9D005FE342 /* MessageCell.xib in Resources */,
 				0B628180235DEE8400E35CAF /* Assets.xcassets in Resources */,
 				15391E742D4FA05100404B3D /* GoogleService-Info.plist in Resources */,
 				0B62819E235F0F4D00E35CAF /* README.md in Resources */,
@@ -257,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FC78922D53CB9D005FE342 /* MessageCell.swift in Sources */,
 				0B62818B235DF00000E35CAF /* WelcomeViewController.swift in Sources */,
 				15391E7E2D50436400404B3D /* AuthManager.swift in Sources */,
 				0B628177235DEE8100E35CAF /* AppDelegate.swift in Sources */,
@@ -264,6 +275,7 @@
 				0B628179235DEE8100E35CAF /* SceneDelegate.swift in Sources */,
 				0B62818F235DF01000E35CAF /* LoginViewController.swift in Sources */,
 				0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */,
+				15FC788E2D5229E1005FE342 /* MessageManager.swift in Sources */,
 				0B62818D235DF00B00E35CAF /* RegisterViewController.swift in Sources */,
 				15391E812D5102F300404B3D /* constants.swift in Sources */,
 			);

@@ -9,14 +9,18 @@
 import UIKit
 import FirebaseAuth
 
-class ChatViewController: UIViewController, AuthProtocol {
+class ChatViewController: UIViewController {
  
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var messageTextfield: UITextField!
     
+    var messageManager = MessageManager()
+    
     var authManager = AuthManager()
+    
+    var messages: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +30,46 @@ class ChatViewController: UIViewController, AuthProtocol {
         title = K.appName
         
         self.authManager.delegate = self
+        
+        self.tableView.dataSource = self
+        
+        self.messages = self.messageManager.getMessages()
+        
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        
+        
 
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
     }
     
+
+    
+    
+}
+
+
+extension ChatViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messageManager.getMessageCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
+        
+        cell.messageText.text = messages[indexPath.row].body
+        
+        return cell
+    }
+    
+    
+}
+
+extension ChatViewController: AuthProtocol {
     @IBAction func logoutBtnPressed(_ sender: UIBarButtonItem) {
         authManager.signOutUser()
 
@@ -46,14 +84,10 @@ class ChatViewController: UIViewController, AuthProtocol {
         
     }
     
-    func getAuthResult(authResult: FirebaseAuth.AuthDataResult) {
-        
-    }
-    
+   
     func onAuthError(error: any Error) {
         print(error.localizedDescription)
     }
-    
     
     
 }
