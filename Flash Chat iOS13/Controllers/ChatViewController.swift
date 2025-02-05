@@ -41,7 +41,16 @@ class ChatViewController: UIViewController {
 
     }
     
+    
     @IBAction func sendPressed(_ sender: UIButton) {
+        
+        let userEmail = self.authManager.getUserEmail()
+        
+        if let messageText = messageTextfield.text, let senderEmail = userEmail {
+            
+            self.messageManager.sendMessage(sender: senderEmail, body: messageText)
+            
+        }
     }
     
 

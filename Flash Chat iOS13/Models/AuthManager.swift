@@ -87,6 +87,10 @@ struct AuthManager{
         }
     }
     
+    func getUserEmail()-> String?{
+        return Auth.auth().currentUser?.email
+    }
+    
     
    
 }
