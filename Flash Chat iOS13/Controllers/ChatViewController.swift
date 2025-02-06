@@ -24,6 +24,14 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messageManager.delegate = self
+        
+        self.messageManager.loadMessages()
+        
+     //   self.messages = self.messageManager.getMessages()
+        
+        
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
         navigationItem.hidesBackButton = true
         
@@ -33,9 +41,11 @@ class ChatViewController: UIViewController {
         
         self.tableView.dataSource = self
         
-        self.messages = self.messageManager.getMessages()
         
-        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        
+       // self.messages = self.messageManager.getMessages()
+      
+      
         
         
 
@@ -58,11 +68,28 @@ class ChatViewController: UIViewController {
     
 }
 
+extension ChatViewController: MessageDelegate {
+    
+    func didUpdateMessage(messages: [Message]) {
+        self.messages = messages
+        print(messages.count)
+        
+        DispatchQueue.main.async {
+            
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    
+}
+
+
 
 extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messageManager.getMessageCount()
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,7 +97,7 @@ extension ChatViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         
-        cell.messageText.text = messages[indexPath.row].body
+        cell.messageText.text = self.messages[indexPath.row].body
         
         return cell
     }
@@ -100,3 +127,5 @@ extension ChatViewController: AuthProtocol {
     
     
 }
+
+
