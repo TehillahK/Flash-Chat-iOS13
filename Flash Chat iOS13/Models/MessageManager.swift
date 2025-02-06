@@ -89,4 +89,43 @@ struct MessageManager {
      //   print(self.messages[0].body)
     }
     
+    func listenForMessages(){
+       
+        var  newMessages: [Message] = []
+        self.db.collection(K.FStore.collectionName).addSnapshotListener {
+            (querySnapshot, error) in
+            
+            if let e = error {
+                print("couldnt get data error:\(e)")
+                return;
+            }else{
+                
+                if let messageDocuments = querySnapshot?.documentChanges{
+                    
+                    
+                    for messageDocument in messageDocuments{
+                        
+                        let messageData = messageDocument.document.data()
+                        
+                        if let senderEmail = messageData[K.FStore.senderField] as? String, let messageBody = messageData[K.FStore.bodyField] as? String {
+                           // print("\(senderEmail)  \(messageBody)")
+                            newMessages.append(Message(sender: senderEmail, body: messageBody))
+                            //self.updateMessageList(messages: messages)
+                            
+                            //print(newMessages.count)
+                            
+                            
+                            
+                        }
+                    }
+                }
+                self.delegate?.didUpdateMessage(messages: newMessages)
+            }
+            
+        }
+       
+       
+     //   print(self.messages[0].body)
+    }
+    
 }

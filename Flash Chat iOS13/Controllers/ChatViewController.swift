@@ -28,6 +28,8 @@ class ChatViewController: UIViewController {
         
         self.messageManager.loadMessages()
         
+        self.messageManager.listenForMessages()
+        
      //   self.messages = self.messageManager.getMessages()
         
         
