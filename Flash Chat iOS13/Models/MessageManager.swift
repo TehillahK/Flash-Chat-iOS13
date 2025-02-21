@@ -40,7 +40,8 @@ struct MessageManager {
     func sendMessage(sender: String, body: String){
         self.db.collection(K.FStore.collectionName).addDocument(data: [
             K.FStore.senderField: sender,
-            K.FStore.bodyField: body
+            K.FStore.bodyField: body,
+            K.FStore.dateField: Date().timeIntervalSince1970
         ], completion:{ (error) in
             if let e = error {
                 print(e)
@@ -48,12 +49,14 @@ struct MessageManager {
                 print("saved data")
             }
         })
+        
+        
     }
     
     func loadMessages(){
        
         var  newMessages: [Message] = []
-        self.db.collection(K.FStore.collectionName).getDocuments(completion: {
+        self.db.collection(K.FStore.collectionName).order(by: K.FStore.dateField).getDocuments(completion: {
             (querySnapshot, error) in
             
             if let e = error {
@@ -92,7 +95,7 @@ struct MessageManager {
     func listenForMessages(){
        
         var  newMessages: [Message] = []
-        self.db.collection(K.FStore.collectionName).addSnapshotListener {
+        self.db.collection(K.FStore.collectionName).order(by: K.FStore.dateField).addSnapshotListener {
             (querySnapshot, error) in
             
             if let e = error {

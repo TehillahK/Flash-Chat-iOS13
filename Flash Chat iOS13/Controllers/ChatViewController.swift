@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class ChatViewController: UIViewController {
+class ChatViewController: KUIViewController {
  
 
     @IBOutlet weak var tableView: UITableView!
@@ -22,30 +22,46 @@ class ChatViewController: UIViewController {
     
     var messages: [Message] = []
     
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    //    setupDismissKeyboardGesture()
+        
+        
+        self.tableView.dataSource = self
+        
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        
+        
+       // self.messageTextfield.delegate = self
+        
+        
         self.messageManager.delegate = self
         
         self.messageManager.loadMessages()
         
         self.messageManager.listenForMessages()
         
+        
+        
      //   self.messages = self.messageManager.getMessages()
         
         
-        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-        
+     
         navigationItem.hidesBackButton = true
         
         title = K.appName
         
         self.authManager.delegate = self
         
-        self.tableView.dataSource = self
-        
+        self.tableView.isScrollEnabled = true
         
         
        // self.messages = self.messageManager.getMessages()
+        
+        
       
       
         
@@ -61,6 +77,9 @@ class ChatViewController: UIViewController {
         if let messageText = messageTextfield.text, let senderEmail = userEmail {
             
             self.messageManager.sendMessage(sender: senderEmail, body: messageText)
+            
+            
+        
             
         }
     }
@@ -108,6 +127,7 @@ extension ChatViewController: UITableViewDataSource {
 }
 
 extension ChatViewController: AuthProtocol {
+    
     @IBAction func logoutBtnPressed(_ sender: UIBarButtonItem) {
         authManager.signOutUser()
 
