@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import IQKeyboardManagerSwift
 
 class ChatViewController: KUIViewController {
  
@@ -61,12 +62,16 @@ class ChatViewController: KUIViewController {
         
        // self.messages = self.messageManager.getMessages()
         
-        
+        IQKeyboardManager.shared.isEnabled = false
       
-      
+    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        IQKeyboardManager.shared.isEnabled = true
         
-
     }
     
     
