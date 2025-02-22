@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, AuthProtocol {
     }
     
     func onAuthError(error: any Error) {
-        
+        print("Signup failed")
         print(error.localizedDescription)
         
     }

@@ -13,7 +13,7 @@ import IQKeyboardManagerSwift
 class ChatViewController: KUIViewController {
  
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messagesTableView: UITableView!
     
     @IBOutlet weak var messageTextfield: UITextField!
     
@@ -31,9 +31,9 @@ class ChatViewController: KUIViewController {
     //    setupDismissKeyboardGesture()
         
         
-        self.tableView.dataSource = self
+        self.messagesTableView.dataSource = self
         
-        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        messagesTableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
         
        // self.messageTextfield.delegate = self
@@ -57,7 +57,7 @@ class ChatViewController: KUIViewController {
         
         self.authManager.delegate = self
         
-        self.tableView.isScrollEnabled = true
+        self.messagesTableView.isScrollEnabled = true
         
         
        // self.messages = self.messageManager.getMessages()
@@ -98,11 +98,16 @@ extension ChatViewController: MessageDelegate {
     
     func didUpdateMessage(messages: [Message]) {
         self.messages = messages
-        print(messages.count)
+        
+       // lengthMessageArr = messages.count - 1
         
         DispatchQueue.main.async {
             
-            self.tableView.reloadData()
+            self.messagesTableView.reloadData()
+            let indexPath = IndexPath(row: messages.count - 1, section: 0)
+
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+           
         }
         
     }

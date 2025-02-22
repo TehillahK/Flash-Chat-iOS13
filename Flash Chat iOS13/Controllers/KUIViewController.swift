@@ -13,13 +13,23 @@ class KUIViewController: UIViewController {
 
     @IBOutlet var bottomConstraintForKeyboard: NSLayoutConstraint!
 
+    @IBOutlet weak var tableView: UITableView!
+    
+     var lengthMessageArr = 0
+    
     @objc func keyboardWillShow(sender: NSNotification) {
         let i = sender.userInfo!
         let s: TimeInterval = (i[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let k = (i[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
         bottomConstraintForKeyboard.constant = k
 
-        UIView.animate(withDuration: s) { self.view.layoutIfNeeded() }
+        UIView.animate(withDuration: s) {
+            self.view.layoutIfNeeded()
+           // let indexPath = IndexPath(row: self.lengthMessageArr , section: 0)
+
+          //  self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+           
+        }
     }
 
     @objc func keyboardWillHide(sender: NSNotification) {
