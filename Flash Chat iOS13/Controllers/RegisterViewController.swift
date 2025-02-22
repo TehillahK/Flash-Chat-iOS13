@@ -18,6 +18,7 @@ class RegisterViewController: UIViewController, AuthProtocol {
     var authManager = AuthManager()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.authManager.delegate = self
     }
     

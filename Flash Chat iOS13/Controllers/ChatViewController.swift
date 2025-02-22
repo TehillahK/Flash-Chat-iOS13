@@ -36,8 +36,7 @@ class ChatViewController: KUIViewController {
         messagesTableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
         
-       // self.messageTextfield.delegate = self
-        
+        self.messageTextfield.delegate = self
         
         self.messageManager.delegate = self
         
@@ -82,10 +81,7 @@ class ChatViewController: KUIViewController {
         if let messageText = messageTextfield.text, let senderEmail = userEmail {
             
             self.messageManager.sendMessage(sender: senderEmail, body: messageText)
-            
-            
-        
-            
+            self.messageTextfield.text = nil
         }
     }
     
@@ -130,6 +126,22 @@ extension ChatViewController: UITableViewDataSource {
         
         cell.messageText.text = self.messages[indexPath.row].body
         
+        if let authEmail = self.authManager.getUserEmail(){
+            
+            if self.messageManager.isSenderUser(authEmail: authEmail, messageSender: self.messages[indexPath.row].sender){
+                cell.youImageView.isHidden = true
+                cell.meImageView.isHidden = false
+                cell.messageBubble.backgroundColor =  UIColor(named: K.BrandColors.purple)
+                cell.messageText.textColor = UIColor(named: K.BrandColors.lightPurple)
+            }else{
+                cell.youImageView.isHidden = false
+                cell.meImageView.isHidden = true
+                cell.messageBubble.backgroundColor =  UIColor(named: K.BrandColors.lightPurple)
+                cell.messageText.textColor = UIColor(named: K.BrandColors.purple)
+            }
+            
+        }
+        
         return cell
     }
     
@@ -144,7 +156,6 @@ extension ChatViewController: AuthProtocol {
     }
     
 
-    
     func didSignOut(signedOut: Bool) {
         if signedOut{
             navigationController?.popToRootViewController(animated: true)
@@ -160,4 +171,8 @@ extension ChatViewController: AuthProtocol {
     
 }
 
+
+extension ChatViewController: UITextFieldDelegate {
+    
+}
 

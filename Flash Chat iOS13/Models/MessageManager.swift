@@ -131,4 +131,9 @@ struct MessageManager {
      //   print(self.messages[0].body)
     }
     
+    
+    func isSenderUser(authEmail:String ,messageSender: String)-> Bool{
+        return authEmail == messageSender
+    }
+    
 }

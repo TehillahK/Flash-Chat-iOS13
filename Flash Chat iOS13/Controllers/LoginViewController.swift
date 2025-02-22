@@ -11,15 +11,20 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController, AuthProtocol {
 
+    @IBOutlet weak var welcomeLabel: UILabel!
     
-
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
     var authManager = AuthManager()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.welcomeLabel.text = "\(K.appName)\n Sign In"
         self.authManager.delegate = self
+        self.errorLabel.isHidden = true
     }
 
     @IBAction func loginPressed(_ sender: UIButton) {
@@ -39,6 +44,13 @@ class LoginViewController: UIViewController, AuthProtocol {
     func onAuthError(error: any Error) {
         print("Signup failed")
         print(error.localizedDescription)
+        self.errorLabel.text = "Wrong password or user does not exist. Please try again."
+        
+        self.emailTextfield.text = nil
+        
+        self.passwordTextfield.text = nil
+        
+        self.errorLabel.isHidden = false
         
     }
     
