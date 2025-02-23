@@ -22,9 +22,11 @@ class LoginViewController: UIViewController, AuthProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.welcomeLabel.text = "\(K.appName)\n Sign In"
+        self.welcomeLabel.text = "Welcome"
         self.authManager.delegate = self
         self.errorLabel.isHidden = true
+        self.emailTextfield.delegate = self
+        self.passwordTextfield.delegate = self
     }
 
     @IBAction func loginPressed(_ sender: UIButton) {
@@ -52,6 +54,16 @@ class LoginViewController: UIViewController, AuthProtocol {
         
         self.errorLabel.isHidden = false
         
+    }
+    
+}
+
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 }

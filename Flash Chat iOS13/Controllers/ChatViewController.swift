@@ -174,5 +174,27 @@ extension ChatViewController: AuthProtocol {
 
 extension ChatViewController: UITextFieldDelegate {
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        
+        var result = false
+        
+        if textField.hasText {
+            let userEmail = self.authManager.getUserEmail()
+            
+            if let messageText = messageTextfield.text, let senderEmail = userEmail {
+                
+                self.messageManager.sendMessage(sender: senderEmail, body: messageText)
+                self.messageTextfield.text = nil
+                
+            }
+            
+            
+            result = true
+            textField.resignFirstResponder()
+        }
+        
+        return result
+    }
 }
 
